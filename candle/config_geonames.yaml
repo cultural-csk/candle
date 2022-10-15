@@ -1,0 +1,134 @@
+mongo_db:
+  host: halimede
+  port: 27017
+  database: ethno_test
+
+geonames:
+  all_countries_filename: ./data/geonames/allCountries.txt
+  hierarchy_filename: ./data/geonames/hierarchy.txt
+  alternate_names_filename: ./data/geonames/alternateNamesV2.txt
+  processed_demonyms_filename: ./data/geonames/processedDemonyms.json
+
+gpus:
+  - -1
+
+db_collections: &db_collections
+  sentences:
+    name: sentences
+    indexes:
+      - file_path
+      - doc_i
+      - sent_i
+  matches:
+    name: matches
+    indexes:
+      - sentence_item_id
+      - match_node_id
+      - match_text
+  sentence_culture_labels:
+    name: sentence_culture_labels
+    indexes:
+      - field: sentence_item_id
+        unique: true
+  generic_sentences:
+    name: generic_sentences
+    indexes:
+      - field: sentence_item_id
+        unique: true
+      - field: is_generic
+        unique: false
+  clusters:
+    name: clusters
+    indexes:
+      - field: node_id
+        unique: true
+  clusters_with_reps:
+    name: clusters_with_reps
+    indexes:
+      - field: node_id
+        unique: false
+
+candidate_labels: &candidate_labels
+  - clothing
+  - food
+  - drink
+  - tradition
+  - ritual
+counter_labels: &counter_labels
+  - advertisement
+  - business
+  - politics
+
+pipeline_components:
+  people_group_matcher:
+    db_collections: *db_collections
+  generic_sentence_filter:
+    db_collections: *db_collections
+    filter:
+      is-short-enough:
+        max_length: &max_length 100
+      has-no-bad-first-word:
+        words:
+          - this
+          - that
+          - these
+          - those
+          - he
+          - she
+          - her
+          - his
+      has-no-pronouns:
+        words:
+          - i
+          - me
+          - my
+          - we
+          - us
+          - our
+          - you
+          - your
+      not-from-unreliable-source:
+        domain_tails:
+          - tk
+      all-propn-have-acceptable-ne-labels:
+        excluded:
+          - ORG
+          - PERSON
+  culture_classifier:
+    #    model: facebook/bart-large-mnli
+    model: valhalla/distilbart-mnli-12-1
+    db_collections: *db_collections
+    candidate_labels: *candidate_labels
+    counter_labels: *counter_labels
+    batch_size: 32
+    overwrite: false
+  clustering_component:
+    db_collections: *db_collections
+    query_db:
+      positive_threshold: 0.5
+      negative_threshold: 0.3
+      max_sentences: 50000
+    sbert: &sbert
+      model: all-MiniLM-L6-v2
+    hac:
+      threshold: 1.5
+  representative_generator:
+    db_collections: *db_collections
+    min_cluster_size: 3
+    cluster_limit: 500
+    gpt3_model: text-curie-001
+    #    gpt3_model: text-davinci-002
+    openai_api_key_path: ./data/openai_api.key
+    overwrite: false
+  ranking_component:
+    db_collections: *db_collections
+    sbert: *sbert
+    idf_threshold: 0.8
+    concept_threshold: 0.6
+    rep_filter:
+      max_length: *max_length
+    aspect_map:
+      ritual: rituals
+      tradition: traditions
+      drink: drinks
+    conceptnet_form_of: ./data/conceptnet_form_of.csv
