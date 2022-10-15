@@ -1,0 +1,16 @@
+torch
+spacy<3.1.0,>=3.0.0
+transformers~=4.21.1
+sentence-transformers
+scikit-learn
+pandas
+datasets
+tqdm
+numpy
+ftfy
+openai
+nltk
+treelib
+pymongo
+PyYAML
+Unidecode
