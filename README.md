@@ -2,8 +2,8 @@
 
 ## Pipeline execution
 
-There are 6 components (
-see [`candle/pipeline/pipeline.py`](candle/pipeline/pipeline.py)):
+There are 6 components
+(see [`candle/pipeline/pipeline.py`](candle/pipeline/pipeline.py)):
 
 1. [`candle/pipeline/component_people_group_matcher.py`](candle/pipeline/component_people_group_matcher.py)
 2. [`candle/pipeline/component_generic_sentence_filter.py`](candle/pipeline/component_generic_sentence_filter.py)
