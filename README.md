@@ -1,3 +1,3 @@
-# CANDLE: Extracting Cultural Commonsense Knowledge at Scale
+# CANDLE 🕯: Extracting Cultural Commonsense Knowledge at Scale
 
 TODO: Write description
