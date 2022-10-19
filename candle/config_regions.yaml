@@ -1,7 +1,7 @@
 mongo_db:
-  host: puck
+  host: localhost
   port: 27017
-  database: ethno_test
+  database: regions
 
 regions:
   filepath: ./data/regions/regions.tsv

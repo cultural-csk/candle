@@ -1,7 +1,7 @@
 mongo_db:
-  host: puck
+  host: localhost
   port: 27017
-  database: ethno_test
+  database: religions
 
 religions:
   filepath: ./data/religions/religions.tsv

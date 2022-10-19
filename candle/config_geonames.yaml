@@ -1,7 +1,7 @@
 mongo_db:
-  host: halimede
+  host: localhost
   port: 27017
-  database: ethno_test
+  database: geonames
 
 geonames:
   all_countries_filename: ./data/filtered_geonames/allCountries.txt
