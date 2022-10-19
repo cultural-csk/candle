@@ -4,10 +4,10 @@ mongo_db:
   database: ethno_test
 
 geonames:
-  all_countries_filename: ./data/geonames/allCountries.txt
-  hierarchy_filename: ./data/geonames/hierarchy.txt
-  alternate_names_filename: ./data/geonames/alternateNamesV2.txt
-  processed_demonyms_filename: ./data/geonames/processedDemonyms.json
+  all_countries_filename: ./data/filtered_geonames/allCountries.txt
+  hierarchy_filename: ./data/filtered_geonames/hierarchy.txt
+  alternate_names_filename: ./data/filtered_geonames/alternateNamesV2.txt
+  processed_demonyms_filename: ./data/filtered_geonames/processedDemonyms.json
 
 gpus:
   - -1
