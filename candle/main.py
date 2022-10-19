@@ -74,7 +74,7 @@ def main():
     )
 
     parser.add_argument(
-        "--cluster_domain",
+        "--cluster_facet",
         type=str,
         help="The domain to cluster",
         required=False
@@ -147,11 +147,11 @@ def main():
 
         return
 
-    if args.cluster_domain or args.cluster_nid:
+    if args.cluster_facet or args.cluster_nid:
         inp = config["pipeline_components"]["clustering_component"].get("input",
                                                                         {})
-        if args.cluster_domain:
-            inp["label"] = args.cluster_domain
+        if args.cluster_facet:
+            inp["label"] = args.cluster_facet
         if args.cluster_nid:
             with open(args.cluster_nid, "r") as f:
                 inp["ids"] = [
