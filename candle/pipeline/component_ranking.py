@@ -281,6 +281,12 @@ class RankingComponent(PipelineComponent):
 
         merge_rows = [row for row in merge_rows if len(row["concepts"]) > 0]
 
+        logger.info(f"There are {len(merge_rows)} clusters with concepts")
+
+        if len(merge_rows) == 0:
+            logger.info(f"Nothing to do")
+            return
+
         bs = [self.build_masked_sentence(s) for s in tqdm(merge_rows)]
         masked_sentences = [b[0] for b in bs]
         spacy_docs = [b[1] for b in bs]
@@ -307,8 +313,8 @@ class RankingComponent(PipelineComponent):
 
             pass_spacy_filter = True
             if self._config["people_group"] == "occupations":
-                for func in OCCUPATIONS_DOC_FILTERS:
-                    if not func(doc):
+                for fn in OCCUPATIONS_DOC_FILTERS:
+                    if not fn(doc):
                         pass_spacy_filter = False
                         break
 
@@ -423,7 +429,7 @@ class RankingComponent(PipelineComponent):
 
         logger.info(
             f"Writing result to file {self._local_config['output']['file']}")
-        with open(self._local_config["output"]["file"], "w+") as func:
+        with open(self._local_config["output"]["file"], "w+") as fn:
             cluster_count = 0
             concept_count = 0
             for new_row in new_rows:
@@ -431,8 +437,8 @@ class RankingComponent(PipelineComponent):
                                        c in good_concepts]
                 cluster_count += 1
                 concept_count += len(new_row["concepts"])
-                func.write(json.dumps(new_row))
-                func.write("\n")
+                fn.write(json.dumps(new_row))
+                fn.write("\n")
 
         logger.info(f"Found {concept_count:,} concepts in {cluster_count:,} "
                     f"clusters")

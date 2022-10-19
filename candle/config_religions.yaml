@@ -117,7 +117,8 @@ pipeline_components:
     db_collections: *db_collections
     min_cluster_size: 3
     cluster_limit: 500
-    gpt3_model: text-curie-001
+#    gpt3_model: text-curie-001
+    gpt3_model: text-davinci-002
     openai_api_key_path: ./data/openai_api.key
     overwrite: false
   ranking_component:
