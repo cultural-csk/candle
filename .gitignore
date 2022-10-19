@@ -171,3 +171,4 @@ cython_debug/
 /candle/data/aggregations/
 database/
 openai_api.key
+_output/
