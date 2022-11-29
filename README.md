@@ -1,6 +1,6 @@
 # CANDLE 🕯: Extracting Cultural Commonsense Knowledge at Scale
 
-## Running spaCy on input corpus
+## Running spaCy on your input corpus
 
 The first step is to run spaCy on your input corpus of choice. The
 script [`candle/run_spacy.py`](candle/run_spacy.py) can be used for this
@@ -12,7 +12,7 @@ run the following command:
 cd candle
 python run_spacy.py \
     -i data/input_corpus/dummy-000.jsonl \
-    -o data/spacy_output/dummy-000.spacy
+    -o data/spacy/dummy-000.spacy
 ```
 
 The input file should be a JSONL file, where each line is a JSON object
