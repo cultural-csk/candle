@@ -172,3 +172,4 @@ cython_debug/
 database/
 openai_api.key
 _output/
+/candle/scripts/
