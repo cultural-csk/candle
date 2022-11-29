@@ -1,6 +1,34 @@
 # CANDLE 🕯: Extracting Cultural Commonsense Knowledge at Scale
 
-## Pipeline execution
+## Running spaCy on input corpus
+
+The first step is to run spaCy on your input corpus of choice. The
+script [`candle/run_spacy.py`](candle/run_spacy.py) can be used for this
+purpose. For example, to run this script on the dummy files in
+the [`candle/data/input_corpus/`](candle/data/input_corpus/) directory,
+run the following command:
+
+```bash
+cd candle
+python run_spacy.py \
+    -i data/input_corpus/dummy-000.jsonl \
+    -o data/spacy_output/dummy-000.spacy
+```
+
+The input file should be a JSONL file, where each line is a JSON object
+with the following fields:
+
+- `text`: The text of the document (required).
+- `timestamp`: The timestamp of the document (optional).
+- `url`: The URL of the document (optional).
+
+After running spaCy on all the input files, you should create a file consisting
+of the paths to all the spaCy output files (see
+e.g., [`candle/data/spacy/dummy.txt`](candle/data/spacy/dummy.txt)).
+This file should be passed to the next steps using the `spacy_file_list`
+argument (see below).
+
+## CANDLE pipeline execution
 
 There are 6 components
 (see [`candle/pipeline/pipeline.py`](candle/pipeline/pipeline.py)):
@@ -16,14 +44,14 @@ For example, to run the pipeline for the `religions` domain (see also
 [`candle/config_religions.yaml`](candle/config_religions.yaml)), follow these
 steps:
 
-Start your local MongoDB instance:
+**Start your local MongoDB instance:**
 
 ```bash
 cd /path/to/mongodb/folder
 bin/mongod --dbpath /folder/to/save/the/database --bind_ip_all
 ```
 
-Run the first 3 components:
+**Run the first 3 components:**
 
 ```bash
 cd candle/candle
@@ -34,7 +62,7 @@ python main.py \
   --components 1 2 3
 ```
 
-Run the last 3 components:
+**Run the last 3 components:**
 
 ```bash
 for facet in "food" "drink" "ritual"
