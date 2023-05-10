@@ -81,3 +81,18 @@ do
     --output_file _outputs/religions_$facet.jsonl
 done
 ```
+
+## Citation
+
+If you use this code, please cite the following paper:
+
+```bibtex
+@inproceedings{candle2023,
+  title={Extracting Cultural Commonsense Knowledge at Scale},
+  author={Nguyen, Tuan-Phong and Razniewski, Simon and Varde, Aparna and Weikum, Gerhard},
+  booktitle={Proceedings of the ACM Web Conference},
+  year={2023}
+}
+```
+
+More information is available on: [https://candle.mpi-inf.mpg.de/](https://candle.mpi-inf.mpg.de/)
