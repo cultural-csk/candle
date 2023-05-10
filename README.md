@@ -1,8 +1,6 @@
 # CANDLE 🕯: Extracting Cultural Commonsense Knowledge at Scale
 
-
 [![CANDLE Introduction Video](https://img.youtube.com/vi/F4eElgjE4R8/0.jpg)](https://www.youtube.com/watch?v=F4eElgjE4R8)
-
 
 ## Running spaCy on your input corpus
 
@@ -84,7 +82,7 @@ done
 
 ## Citation
 
-If you use this code, please cite the following paper:
+If you use this code or our datasets, please cite the following paper:
 
 ```bibtex
 @inproceedings{candle2023,
