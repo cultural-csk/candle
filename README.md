@@ -1,11 +1,15 @@
 # CANDLE 🕯: Extracting Cultural Commonsense Knowledge at Scale
 
+
+[![CANDLE Introduction Video](https://img.youtube.com/vi/F4eElgjE4R8/0.jpg)](https://www.youtube.com/watch?v=F4eElgjE4R8)
+
+
 ## Running spaCy on your input corpus
 
 The first step is to run spaCy on your input corpus of choice. The
 script [`candle/run_spacy.py`](candle/run_spacy.py) can be used for this
 purpose. For example, to run this script on the dummy files in
-the [`candle/data/input_corpus/`](candle/data/input_corpus/) directory,
+the [`candle/data/input_corpus`](candle/data/input_corpus) directory,
 run the following command:
 
 ```bash
